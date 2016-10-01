@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player.cs : MonoBehaviour {
+public class WeaponStats : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
