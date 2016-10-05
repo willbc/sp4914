@@ -22,6 +22,8 @@ public class Base_Weapon_Controller : MonoBehaviour {
     float currentCapacity;
     public Text ammoText;
 
+    HUDController hudController;
+
     AudioSource shotSound;
     LineRenderer shotLine;
     Light shotLight;
@@ -73,15 +75,21 @@ public class Base_Weapon_Controller : MonoBehaviour {
 
     void UpdateAmmoText() {
         ammoText.text = "Ammo: " + Mathf.RoundToInt(currentCapacity);
+        hudController.UpdateAmmoBar(currentCapacity, maxCapacity);
     }
 
     void Start() {
         currentCapacity = maxCapacity;
         UpdateAmmoText();
         shotSound = GetComponent<AudioSource>();
-        shotLine = GetComponent <LineRenderer> ();
-        shotLight = GetComponent<Light> ();
+        shotLine = GetComponent <LineRenderer>();
+        Debug.Log(shotLine);
+        shotLight = GetComponent<Light>();
         shootableMask = LayerMask.GetMask ("Shootable");
+
+        hudController = GameObject.Find("BasicHUD1").GetComponent<HUDController>();
+        Debug.Log(hudController);
+        //hudController.UpdateAmmoBar(10f, 20f);
     }
 
     void Update() {
@@ -89,8 +97,10 @@ public class Base_Weapon_Controller : MonoBehaviour {
         effectsTimer += Time.deltaTime;
 
         if(effectsTimer > shotEffectsDisplayTime) {
-            shotLine.enabled = false;
-            shotLight.enabled = false;
+            if(shotLine != null) {
+                shotLine.enabled = false;
+                shotLight.enabled = false;
+            }
         }
 
         if(currentCapacity < maxCapacity) {
