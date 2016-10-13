@@ -33,6 +33,11 @@ public class HUDController : MonoBehaviour {
         playerHealthImage.fillAmount = Mathf.Clamp(healthPercent, 0f, 1f);
     }
 
+    public void UpdateBaseHealth(float healthAmount, float healthMax) {
+        float healthPercent = healthAmount / healthMax; 
+        baseHealthImage.fillAmount = Mathf.Clamp(healthPercent, 0f, 1f);
+    }
+
     public void UpdateAmmoBar(float ammoAmount, float ammoMax) {
         if(ammoBarImage == null) {
             return;
