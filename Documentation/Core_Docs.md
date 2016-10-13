@@ -9,7 +9,7 @@
    3. [Weapon Controller](#weapon-controller)
 3. [Weapons](#weapons)
    1. [Base Weapon Controller](#base-weapon-controller)
-
+4. [Player HUD](#player-hud)
 ---
 
 ---
@@ -87,3 +87,22 @@ This controller implements the `Fire()` function which can handle either a proje
 All the stats of a weapon are public variables in this script so the 'Base Weapon' can essentially be used as an abstracted weapon which can be used to make prefabs of specific weapons once the stats are set.
 
 This script also handles the weapons ammo amount and it's recharging.
+
+
+
+
+---
+
+---
+<a name="player-hud"></a>
+# Player HUD
+
+The HUD has three UI image bars to display the current ammo amount, player health, and base health. The `fillAmount` is adjusted (given a value between 0 and 1) to represent the values.
+This is done in the `HUDController.cs` script which is attached to the `Basic HUD 1` gameobject in the scene. The HUDController is accessed by doing a global search for the hardcoded name 'Basic HUD 1' on to which you can call the following functions:
+* UpdatePlayerHealth(float healthAmount, float healthMax)
+* UpdateBaseHealth(float healthAmount, float healthMax)
+* UpdateAmmoBar(float ammoAmount, float ammoMax)
+
+In each function a ratio is determined between the two inputs and the appropriate bar has its fill amount adjusted.
+
+!! Add in color changing to match capacity
