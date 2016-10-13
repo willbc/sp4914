@@ -38,7 +38,9 @@ public class Base_Weapon_Controller : MonoBehaviour {
         }
 
         cooldownRemaining = cooldownTime;
-        shotSound.Play();
+        if(shotSound != null) {
+            shotSound.Play();   
+        }
         currentCapacity -= 1;
 
         if(isProjectile) {
@@ -74,21 +76,27 @@ public class Base_Weapon_Controller : MonoBehaviour {
     }
 
     void UpdateAmmoText() {
-        ammoText.text = "Ammo: " + Mathf.RoundToInt(currentCapacity);
+        ammoText.text = "Ammo: " + Mathf.Floor(currentCapacity);
         hudController.UpdateAmmoBar(currentCapacity, maxCapacity);
     }
 
     void Start() {
         currentCapacity = maxCapacity;
-        UpdateAmmoText();
         shotSound = GetComponent<AudioSource>();
         shotLine = GetComponent <LineRenderer>();
-        Debug.Log(shotLine);
         shotLight = GetComponent<Light>();
         shootableMask = LayerMask.GetMask ("Shootable");
 
         hudController = GameObject.Find("BasicHUD1").GetComponent<HUDController>();
-        Debug.Log(hudController);
+
+//        Component[] components = hudController.GetComponents<Component>();
+//        foreach (Component c in components){
+//            Debug.Log("!! " + hudController.name + "\t["+c.name+"]" + 
+//                "\t"+ c.GetType() +"\t"+c.GetType().BaseType);
+//
+//        }
+
+        UpdateAmmoText();
         //hudController.UpdateAmmoBar(10f, 20f);
     }
 
