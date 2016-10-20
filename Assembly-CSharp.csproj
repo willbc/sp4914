@@ -48,7 +48,9 @@
      <Compile Include="Assets\Scripts\Base_Weapon_Controller.cs" />
      <Compile Include="Assets\Scripts\Crosshairs.cs" />
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
+     <Compile Include="Assets\Scripts\HUDController.cs" />
      <Compile Include="Assets\Scripts\Player_Controller.cs" />
+     <Compile Include="Assets\Scripts\Player_Inventory_Controller.cs" />
      <Compile Include="Assets\Scripts\Player_Weapon_Controller.cs" />
      <Compile Include="Assets\Scripts\WeaponStats.cs" />
  <Reference Include="UnityEngine.UI">
