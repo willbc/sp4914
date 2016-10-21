@@ -19,6 +19,8 @@ public class Ray_Controller : MonoBehaviour {
 	}
 
     public Ray GetMainRay() {
+        Debug.Log("return ray");
+        Debug.Log(mainRay.origin);
         return mainRay;
     }
 }
