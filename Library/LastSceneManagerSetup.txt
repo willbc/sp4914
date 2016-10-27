@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/GG EnemyTest2.unity
+- path: Assets/Scenes/GridGen.unity
   isLoaded: 1
   isActive: 1
