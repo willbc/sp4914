@@ -53,7 +53,7 @@ public class Map_Test_Controller : MonoBehaviour {
         towerSpotZ = childCollider.bounds.size.z;
 
         foreach(Transform child in transform) {
-            Debug.Log(child.tag);
+            //Debug.Log(child.tag);
             if(child.CompareTag("TowerSpot")) {
                 towerSpots.Add(child);
             }
@@ -62,7 +62,7 @@ public class Map_Test_Controller : MonoBehaviour {
             }
         }
 
-        Debug.Log(gridEdge.Count);
+        //Debug.Log(gridEdge.Count);
 
         int edgeIndex = 0;
         for(int i = 0; i < totalSpots; i++) {

@@ -19,6 +19,6 @@ public class PathTest_Controller : MonoBehaviour {
     void Update() {
         nav.SetDestination(target.position);
         nav.CalculatePath(target.position, new NavMeshPath());
-        Debug.Log(nav.path.status);
+        //Debug.Log(nav.path.status);
     }
 }

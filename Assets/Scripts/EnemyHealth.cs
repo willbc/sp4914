@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour {
     public Text enemyHealthText;
 
     public void ReceiveDamage(float damage) {
-        Debug.Log("Enemy received damage: " + damage);
+        //Debug.Log("Enemy received damage: " + damage);
         healthPoints -= damage;
         UpdateEnemyHealthText();
         healthTextTimer = healthTextTimeout;

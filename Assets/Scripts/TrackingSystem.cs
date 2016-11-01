@@ -9,29 +9,32 @@ public class TrackingSystem : MonoBehaviour
     Vector3 m_lastKnownPosition = Vector3.zero;
     Quaternion m_lookAtRotation;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (m_target)
-        {
-            if (m_lastKnownPosition != m_target.transform.position)
-            {
-                m_lastKnownPosition = m_target.transform.position;
-                m_lookAtRotation = Quaternion.LookRotation(m_lastKnownPosition - transform.position);
+    void Update() {
+        if (m_target) {
+            if (m_lastKnownPosition != m_target.transform.position) {
+                //m_lastKnownPosition = m_target.transform.position;
+                //m_lookAtRotation = Quaternion.LookRotation(m_lastKnownPosition - transform.position);
             }
 
-            if (transform.rotation != m_lookAtRotation)
-            {
-                m_lookAtRotation.x = 0.0f;
-                m_lookAtRotation.z = 0.0f;
-
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, m_lookAtRotation, speed * Time.deltaTime);
+            Debug.Log(transform.rotation);
+            Debug.Log(m_lookAtRotation);
+            if (transform.rotation != m_lookAtRotation) {
+//                m_lookAtRotation.x = 0.0f;
+//                m_lookAtRotation.y = 0.0f;
+//                m_lookAtRotation.z = 0.0f;
+//                m_lookAtRotation.w = 0.0f;
+                Vector3 lookPosition = m_target.transform.position - transform.forward;
+                //lookPosition.y = 0;
+                lookPosition.z = 0;
+                lookPosition.x = 0;
+                Quaternion lookRotation = Quaternion.LookRotation(lookPosition);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * speed);
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation, m_lookAtRotation, speed * Time.deltaTime);
             }
         }
     }
 
-    public void SetTarget(GameObject target)
-    {
+    public void SetTarget(GameObject target) {
         m_target = target;
     }
 }

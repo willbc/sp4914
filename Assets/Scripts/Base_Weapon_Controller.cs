@@ -60,8 +60,8 @@ public class Base_Weapon_Controller : MonoBehaviour {
             if(Physics.Raycast (shotRay, out hitInfo, range, shootableMask)) {
                 Vector3 hitPoint = hitInfo.point;
                 GameObject hitObject = hitInfo.collider.gameObject;
-                Debug.Log ("Hit object: " + hitObject.name);
-                Debug.Log ("Hit point: " + hitPoint);
+                //Debug.Log ("Hit object: " + hitObject.name);
+                //Debug.Log ("Hit point: " + hitPoint);
 
                 EnemyHealth enemy = hitObject.GetComponent<EnemyHealth>();
                 if(enemy != null) {
