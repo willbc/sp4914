@@ -8,6 +8,8 @@ public class Tower_Node_Controller : MonoBehaviour {
     public GameObject towerToBuild;
     public GameObject towerFrame;
 
+    Map_Test_Controller mapTest;
+
     public bool isHitByRay;
 
     public bool towerBuilt = false;
@@ -26,6 +28,9 @@ public class Tower_Node_Controller : MonoBehaviour {
         rayController = GameObject.Find("Main Camera").GetComponent<Ray_Controller>();
         rend = GetComponent<Renderer>();
         SetToStandbyColor();
+
+        GameObject pathTesterObject = GameObject.Find("PathTester");
+        mapTest = GameObject.Find("MapTestGrid").GetComponent<Map_Test_Controller>();
 	}
 	
 	// Update is called once per frame
@@ -44,13 +49,8 @@ public class Tower_Node_Controller : MonoBehaviour {
 
         if(isHitByRay) {
             if (!towerBuilt && Input.GetMouseButtonDown(1)) {
-                GameObject tower = (GameObject)Instantiate(towerToBuild, transform.position, transform.rotation);
-                tower.transform.SetParent(transform);
-
-                towerFrame.transform.position = transform.position;//new Vector3(transform.position.x, transform.position.y, 0f);
-
-                Debug.Log(towerFrame.transform.position);
-                towerBuilt = true;
+                Debug.Log("call build tower");
+                BuildTower();
             }
             SetToActiveColor();
         }
@@ -65,5 +65,42 @@ public class Tower_Node_Controller : MonoBehaviour {
 
     void SetToStandbyColor() {
         rend.material.color = towerSpotStandbyColor;
+    }
+
+    bool TestTowerSpace() {
+        return false;
+    }
+
+    public void BuildTower() {
+        mapTest.testTowerSpot(transform.name, BuildTowerConfirmed, BuildTowerDenied);
+    }
+
+    public void BuildTowerDenied() {
+        Debug.Log("Could not build tower");
+    }
+
+    public void BuildTowerConfirmed() {
+        towerFrame.transform.position = transform.position;
+        GameObject tower = (GameObject)Instantiate(towerToBuild, transform.position, transform.rotation);
+        tower.transform.SetParent(transform);
+        towerBuilt = true;
+        /*towerFrame.transform.position = transform.position;//new Vector3(transform.position.x, transform.position.y, 0f);
+        NavMeshPath path = new NavMeshPath();
+        pathTester.CalculatePath(GameObject.FindGameObjectWithTag("Finish").transform.position, path);
+        Debug.Log("before yield");
+        yield return new WaitForSeconds(Time.deltaTime * 4);
+        Debug.Log("after yeild");
+        Debug.Log("test path: " + pathTester.hasPath);
+        Debug.Log(path.status);
+        Debug.Log(path.corners);
+        testTowerSpace = (path.status == NavMeshPathStatus.PathComplete);
+        if(testTowerSpace) {
+            GameObject tower = (GameObject)Instantiate(towerToBuild, transform.position, transform.rotation);
+            tower.transform.SetParent(transform);
+            towerBuilt = true;
+        }
+        else {
+            towerFrame.transform.position = new Vector3(transform.position.x, transform.position.y - 2.0f, transform.position.z);
+        }*/
     }
 }

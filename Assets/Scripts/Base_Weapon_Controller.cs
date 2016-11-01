@@ -76,7 +76,7 @@ public class Base_Weapon_Controller : MonoBehaviour {
     }
 
     void UpdateAmmoText() {
-        ammoText.text = "Ammo: " + Mathf.Floor(currentCapacity);
+        //ammoText.text = "Ammo: " + Mathf.Floor(currentCapacity);
         hudController.UpdateAmmoBar(currentCapacity, maxCapacity);
     }
 
