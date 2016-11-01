@@ -120,7 +120,7 @@ public class Map_Test_Controller : MonoBehaviour {
 
     IEnumerator CalcPathDelay(Test_Node_Controller node, CanBuildTower canBuildCallback, CanNotBuildTower canNotBuildCallback) {
         Debug.Log(path.status);
-        yield return new WaitForSeconds(Time.deltaTime * 20);
+        yield return new WaitForSeconds(Time.deltaTime * 2);
         Debug.Log(agent.path.status);
         Debug.Log(agent.path.corners.Length);
         for(int i = 0; i < path.corners.Length; i++) {
