@@ -3,8 +3,9 @@ using System.Collections;
 
 public class TrackingSystem : MonoBehaviour
 {
-    public float speed = 3.0f;
-    public GameObject m_target = null;
+    public float speed = 60.0f;
+
+    GameObject m_target = null;
     Vector3 m_lastKnownPosition = Vector3.zero;
     Quaternion m_lookAtRotation;
 
@@ -21,20 +22,16 @@ public class TrackingSystem : MonoBehaviour
 
             if (transform.rotation != m_lookAtRotation)
             {
+                m_lookAtRotation.x = 0.0f;
+                m_lookAtRotation.z = 0.0f;
+
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, m_lookAtRotation, speed * Time.deltaTime);
             }
         }
     }
 
-    bool SetTarget(GameObject target)
+    public void SetTarget(GameObject target)
     {
-        if (!target)
-        {
-            return false;
-        }
-
         m_target = target;
-
-        return true;
     }
 }
