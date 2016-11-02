@@ -27,9 +27,13 @@ public class Player_Controller : MonoBehaviour {
     float verticalSpeed = 0.0f;
     float currentSpeed = 0.0f;
 
+    public bool lockCursor = true;
+    private bool m_cursorIsLocked = true;
+
 
 	void Start () {
         characterController = GetComponent<CharacterController>();
+        UpdateCursorLock();
 	}
 	
 	void Update () {
@@ -72,5 +76,38 @@ public class Player_Controller : MonoBehaviour {
         movement = transform.rotation * movement;
 
         characterController.Move ( movement * Time.deltaTime );
+    }
+
+    public void SetCursorLock(bool value) {
+        lockCursor = value;
+        if(!lockCursor) { //we force unlock the cursor if the user disable the cursor locking helper
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    public void UpdateCursorLock() {
+        //if the user set "lockCursor" we check & properly lock the cursos
+        if (lockCursor) {
+            InternalLockUpdate();   
+        }
+    }
+
+    private void InternalLockUpdate() {
+        if(Input.GetKeyUp(KeyCode.Escape)) {
+            m_cursorIsLocked = false;
+        }
+        else if(Input.GetMouseButtonUp(0)) {
+            m_cursorIsLocked = true;
+        }
+
+        if (m_cursorIsLocked) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else if (!m_cursorIsLocked) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }

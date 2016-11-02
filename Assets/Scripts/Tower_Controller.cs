@@ -9,34 +9,34 @@ public class Tower_Controller : MonoBehaviour
     RangeChecker m_range;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         m_tracker = GetComponent<TrackingSystem>();
         m_shooter = GetComponent<ShootingSystem>();
         m_range = GetComponent<RangeChecker>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         TargetNearest();
     }
 
-    void TargetNearest()
-    {
+    void TargetNearest() {
         List<GameObject> validTargets = m_range.GetValidTargets();
 
         GameObject curTarget = null;
         float closestDist = 0.0f;
 
-        for (int i = 0; i < validTargets.Count; i++)
-        {
-            float distance = validTargets[i].GetComponent<NavMeshAgent>().remainingDistance;
-            
-            if (!curTarget || distance < closestDist)
-            {
-                curTarget = validTargets[i];
-                closestDist = distance;
+        for (int i = 0; i < validTargets.Count; i++) {
+            if(validTargets[i] != null) {
+                NavMeshAgent targetAgent = validTargets[i].GetComponent<NavMeshAgent>();
+                if(targetAgent != null) {
+                    float distance = targetAgent.remainingDistance;
+
+                    if (!curTarget || distance < closestDist) {
+                        curTarget = validTargets[i];
+                        closestDist = distance;
+                    }
+                }
             }
         }
 
