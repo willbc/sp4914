@@ -48,12 +48,13 @@ public class Tower_Node_Controller : MonoBehaviour {
         }
 
         if(isHitByRay) {
-            Debug.Log("hit by ray");
+            SetToActiveColor();
             if (!towerBuilt && Input.GetMouseButtonDown(1)) {
-                Debug.Log("call build tower");
                 BuildTower();
             }
-            SetToActiveColor();
+            else if(Input.GetMouseButtonDown(1)) {
+                // Tower management options, upgrade, destroy, etc.
+            }
         }
         else {
             SetToStandbyColor();
