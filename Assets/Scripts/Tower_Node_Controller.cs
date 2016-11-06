@@ -48,11 +48,13 @@ public class Tower_Node_Controller : MonoBehaviour {
         }
 
         if(isHitByRay) {
+            SetToActiveColor();
             if (!towerBuilt && Input.GetMouseButtonDown(1)) {
-                Debug.Log("call build tower");
                 BuildTower();
             }
-            SetToActiveColor();
+            else if(Input.GetMouseButtonDown(1)) {
+                // Tower management options, upgrade, destroy, etc.
+            }
         }
         else {
             SetToStandbyColor();
@@ -72,7 +74,8 @@ public class Tower_Node_Controller : MonoBehaviour {
     }
 
     public void BuildTower() {
-        mapTest.testTowerSpot(transform.name, BuildTowerConfirmed, BuildTowerDenied);
+        //mapTest.testTowerSpot(transform.name, BuildTowerConfirmed, BuildTowerDenied);
+        BuildTowerConfirmed();
     }
 
     public void BuildTowerDenied() {
