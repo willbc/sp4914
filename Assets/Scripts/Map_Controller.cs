@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Map_Initialization : MonoBehaviour {
+public class Map_Controller : MonoBehaviour {
 
     List<Transform> towerSpots = new List<Transform>();
     List<Transform> gridEdge = new List<Transform>();
@@ -82,5 +82,9 @@ public class Map_Initialization : MonoBehaviour {
         return 0.5f * towerSpotX + spaceBetween;
     }
 
+    public bool TestTowerSpot(int spotNumber) {
 
+        return true;
+    }
+        
 }

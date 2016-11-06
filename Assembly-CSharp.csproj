@@ -53,7 +53,7 @@
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\HUDController.cs" />
-     <Compile Include="Assets\Scripts\Map_Initialization.cs" />
+     <Compile Include="Assets\Scripts\Map_Controller.cs" />
      <Compile Include="Assets\Scripts\Map_Test_Controller.cs" />
      <Compile Include="Assets\Scripts\PathDraw.cs" />
      <Compile Include="Assets\Scripts\PathTest_Controller.cs" />
