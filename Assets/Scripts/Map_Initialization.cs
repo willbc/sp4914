@@ -12,8 +12,8 @@ public class Map_Initialization : MonoBehaviour {
 
     float spaceBetween = 0.0f;//0.075f;
 
-    int mapRows = 11;
-    int mapCols = 13;
+    int mapRows = 9;
+    int mapCols = 9;
 
     int rowCount = 0;
     int colCount = 0;
@@ -28,7 +28,7 @@ public class Map_Initialization : MonoBehaviour {
         int colMax = mapCols / 2 + 1;
         rowCount = rowMin;
         colCount = colMin;
-        MeshCollider childCollider = transform.GetChild(0).GetComponent<MeshCollider>();
+        MeshCollider childCollider = transform.GetChild(0).GetChild(0).GetComponent<MeshCollider>();
         towerSpotX = childCollider.bounds.size.x;
         towerSpotZ = childCollider.bounds.size.z;
 

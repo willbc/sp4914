@@ -48,6 +48,7 @@ public class Tower_Node_Controller : MonoBehaviour {
         }
 
         if(isHitByRay) {
+            Debug.Log("hit by ray");
             if (!towerBuilt && Input.GetMouseButtonDown(1)) {
                 Debug.Log("call build tower");
                 BuildTower();
@@ -72,7 +73,8 @@ public class Tower_Node_Controller : MonoBehaviour {
     }
 
     public void BuildTower() {
-        mapTest.testTowerSpot(transform.name, BuildTowerConfirmed, BuildTowerDenied);
+        //mapTest.testTowerSpot(transform.name, BuildTowerConfirmed, BuildTowerDenied);
+        BuildTowerConfirmed();
     }
 
     public void BuildTowerDenied() {
