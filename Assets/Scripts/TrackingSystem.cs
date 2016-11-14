@@ -21,8 +21,8 @@ public class TrackingSystem : MonoBehaviour
                 //m_lookAtRotation = Quaternion.LookRotation(m_lastKnownPosition - transform.position);
             //}
 
-            Debug.Log(transform.rotation);
-            Debug.Log(m_lookAtRotation);
+            //Debug.Log(transform.rotation);
+            //Debug.Log(m_lookAtRotation);
             //if (transform.rotation != m_lookAtRotation) {
 //                m_lookAtRotation.x = 0.0f;
 //                m_lookAtRotation.y = 0.0f;
