@@ -17,8 +17,8 @@ public class Map_Test_Controller : MonoBehaviour {
     float yBias = 0.0f;
     float zBias = 65.0f;
 
-    int mapRows = 11;
-    int mapCols = 13;
+    int mapRows = 9;
+    int mapCols = 9;
 
     int rowCount = 0;
     int colCount = 0;
@@ -48,7 +48,7 @@ public class Map_Test_Controller : MonoBehaviour {
         int colMax = mapCols / 2 + 1;
         rowCount = rowMin;
         colCount = colMin;
-        MeshCollider childCollider = transform.GetChild(0).GetComponent<MeshCollider>();
+        MeshCollider childCollider = transform.GetChild(0).GetChild(0).GetComponent<MeshCollider>();
         towerSpotX = childCollider.bounds.size.x;
         towerSpotZ = childCollider.bounds.size.z;
 
@@ -105,22 +105,37 @@ public class Map_Test_Controller : MonoBehaviour {
 
 
     public void testTowerSpot(string spotName, CanBuildTower canBuildCallback, CanNotBuildTower canNotBuildCallback) {
-        // May be able to optimize by getting the index from the spot name 'TowerSpot (index)'
+        Debug.Log(spotName);
         string indexString = spotName.Split('(', ')')[1];
         int index = 0;
         if(int.TryParse(indexString, out index)) {
             Debug.Log(towerSpots.Count);
             Debug.Log(index);
-            Test_Node_Controller node = towerSpots[index].GetComponent<Test_Node_Controller>();
+            Test_Node_Controller node = towerSpots[index].GetChild(0).GetComponent<Test_Node_Controller>();
             node.BuildTower();
             agent.CalculatePath(GameObject.FindGameObjectWithTag("FinishTest").transform.position, path);
+//            while(agent.pathPending) {
+//                Debug.Log("path pending");
+//                Debug.Log(agent.pathPending);
+//                Debug.Log(agent.path.status);
+//            }
+//            Debug.Log(agent.pathPending);
+//            Debug.Log(agent.path.status);
+//            if(agent.path.status == NavMeshPathStatus.PathComplete) {
+//                canBuildCallback();
+//            }
+//            else {
+//                node.RemoveTower();
+//                canNotBuildCallback();
+//            }
             StartCoroutine(CalcPathDelay(node, canBuildCallback, canNotBuildCallback));
         }
     }
 
     IEnumerator CalcPathDelay(Test_Node_Controller node, CanBuildTower canBuildCallback, CanNotBuildTower canNotBuildCallback) {
         Debug.Log(path.status);
-        yield return new WaitForSeconds(Time.deltaTime * 2);
+        Debug.Log(agent.pathPending);
+        yield return new WaitForSeconds(Time.deltaTime * 50);
         Debug.Log(agent.path.status);
         Debug.Log(agent.path.corners.Length);
         for(int i = 0; i < path.corners.Length; i++) {

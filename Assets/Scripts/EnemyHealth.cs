@@ -38,7 +38,7 @@ public class EnemyHealth : MonoBehaviour {
     }
 
     void UpdateEnemyHealthBar() {
-        Debug.Log("update health bar");
+        //Debug.Log("update health bar");
         healthBarImage.fillAmount = health / maxHealth;
     }
 

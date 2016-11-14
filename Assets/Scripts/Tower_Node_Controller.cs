@@ -8,7 +8,7 @@ public class Tower_Node_Controller : MonoBehaviour {
     public GameObject towerToBuild;
     public GameObject towerFrame;
 
-    Map_Test_Controller mapTest;
+    Map_Controller mapController;
 
     public bool isHitByRay;
 
@@ -30,7 +30,7 @@ public class Tower_Node_Controller : MonoBehaviour {
         SetToStandbyColor();
 
         GameObject pathTesterObject = GameObject.Find("PathTester");
-        mapTest = GameObject.Find("MapTestGrid").GetComponent<Map_Test_Controller>();
+        mapController = GameObject.Find("MapGrid").GetComponent<Map_Controller>();
 	}
 	
 	// Update is called once per frame
@@ -74,8 +74,18 @@ public class Tower_Node_Controller : MonoBehaviour {
     }
 
     public void BuildTower() {
-        //mapTest.testTowerSpot(transform.name, BuildTowerConfirmed, BuildTowerDenied);
-        BuildTowerConfirmed();
+        string indexString = transform.parent.transform.name.Split('(', ')')[1];
+        int index = 0;
+        bool canBuildTower = false;
+        if(int.TryParse(indexString, out index)) {
+            canBuildTower = mapController.TestTowerSpot(index);
+            if(canBuildTower) {
+                BuildTowerConfirmed();
+            }
+            else {
+                BuildTowerDenied();
+            }
+        }
     }
 
     public void BuildTowerDenied() {
