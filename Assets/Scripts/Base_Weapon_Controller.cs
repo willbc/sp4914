@@ -50,9 +50,6 @@ public class Base_Weapon_Controller : MonoBehaviour {
             effectsTimer = 0f;
             shotLight.enabled = true;
 
-            shotLine.enabled = true;
-            shotLine.SetPosition (0, transform.position);
-
             shotRay.origin = transform.position;
             shotRay.direction = transform.forward;
 
@@ -62,6 +59,9 @@ public class Base_Weapon_Controller : MonoBehaviour {
                 GameObject hitObject = hitInfo.collider.gameObject;
                 //Debug.Log ("Hit object: " + hitObject.name);
                 //Debug.Log ("Hit point: " + hitPoint);
+                //shotLine.enabled = true;
+                //shotLine.SetPosition (0, transform.position);
+                //shotLine.SetPosition(1, hitPoint);
 
                 EnemyHealth enemy = hitObject.GetComponent<EnemyHealth>();
                 if(enemy != null) {
