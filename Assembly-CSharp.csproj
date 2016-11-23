@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Assets\Scripts\BaseProjectile.cs" />
      <Compile Include="Assets\Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scene_Manager.cs" />
      <Compile Include="Assets\Scripts\Base_Weapon_Controller.cs" />
      <Compile Include="Assets\Scripts\CameraFacingBillboard.cs" />
      <Compile Include="Assets\Scripts\Crosshairs.cs" />
