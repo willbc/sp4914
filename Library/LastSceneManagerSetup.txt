@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/HUD Update.unity
-=======
-- path: Assets/Scenes/menuScene.unity
->>>>>>> master
+- path: Assets/Scenes/Main11-6.unity
   isLoaded: 1
   isActive: 1
