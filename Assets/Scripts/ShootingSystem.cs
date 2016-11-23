@@ -25,9 +25,10 @@ public class ShootingSystem : MonoBehaviour
         }
     }
 
-    public void SetTarget(GameObject target)
-    {
-        m_target = target;
-        enemyTarget = m_target.GetComponent<EnemyHealth>();
+    public void SetTarget(GameObject target) {
+        if(target != null) {
+            m_target = target;
+            enemyTarget = m_target.GetComponent<EnemyHealth>();   
+        }
     }
 }
