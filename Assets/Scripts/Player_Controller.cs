@@ -27,7 +27,7 @@ public class Player_Controller : MonoBehaviour {
     float verticalSpeed = 0.0f;
     float currentSpeed = 0.0f;
 
-    public bool lockCursor = true;
+    bool lockCursor = false;
     private bool m_cursorIsLocked = true;
 
 
