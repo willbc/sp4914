@@ -5,10 +5,12 @@ public class Tower_Node_Controller : MonoBehaviour {
 
     Ray playerRay;
     Ray_Controller rayController;
-    public GameObject towerToBuild;
+    public GameObject[] towers;
+    public int towerToBuild;
     public GameObject towerFrame;
 
     Map_Controller mapController;
+    Player_Inventory_Controller playerInventory;
 
     public bool isHitByRay;
 
@@ -31,6 +33,7 @@ public class Tower_Node_Controller : MonoBehaviour {
 
         GameObject pathTesterObject = GameObject.Find("PathTester");
         mapController = GameObject.Find("MapGrid").GetComponent<Map_Controller>();
+        playerInventory = GameObject.Find("Player").GetComponent<Player_Inventory_Controller>();
 	}
 	
 	// Update is called once per frame
@@ -94,7 +97,8 @@ public class Tower_Node_Controller : MonoBehaviour {
 
     public void BuildTowerConfirmed() {
         towerFrame.transform.position = transform.position;
-        GameObject tower = (GameObject)Instantiate(towerToBuild, transform.position, transform.rotation);
+        towerToBuild = playerInventory.getTowerIndex();
+        GameObject tower = (GameObject)Instantiate(towers[towerToBuild], transform.position, transform.rotation);
         tower.transform.SetParent(transform);
         towerBuilt = true;
         /*towerFrame.transform.position = transform.position;//new Vector3(transform.position.x, transform.position.y, 0f);

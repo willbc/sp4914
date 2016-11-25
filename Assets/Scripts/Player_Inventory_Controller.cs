@@ -7,6 +7,12 @@ public class Player_Inventory_Controller : MonoBehaviour {
     public int startMoney = 500;
     int money;
     public Text moneyText;
+    int towerIndex = 0;
+
+    public Sprite shockTowerBadge;
+    public Sprite slowTowerBadge;
+    public Sprite bashTowerBadge;
+    public Image towerBadge;
 
     void Start () {
         money = startMoney;
@@ -31,5 +37,25 @@ public class Player_Inventory_Controller : MonoBehaviour {
 
     public void UpdateMoneyText() {
         moneyText.text = "$: " + money;
+    }
+
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.Q)) {
+            towerIndex = (towerIndex + 1) % 3;
+
+            if(towerIndex == 0) {
+                towerBadge.sprite = shockTowerBadge;
+            }
+            else if(towerIndex == 1) {
+                towerBadge.sprite = slowTowerBadge;
+            }
+            else {
+                towerBadge.sprite = bashTowerBadge;
+            }
+        }
+    }
+
+    public int getTowerIndex() {
+        return towerIndex;
     }
 }
