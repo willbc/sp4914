@@ -51,13 +51,23 @@ public class TrackingSystem : MonoBehaviour
         }
     }*/
 
-    public void ShowLine() {
-        aimLine.enabled = true;
-        aimLine.SetPosition(0, transform.position);
-        aimLine.SetPosition(1, m_target.transform.position);
-        Debug.Log("Show Line");
-        StartCoroutine(LineDelay());
-        Debug.Log("stop show line");
+    public void ShowLine(bool keepOn) {
+        if(m_target != null) {
+            aimLine.enabled = true;
+            aimLine.SetPosition(0, transform.position);
+            aimLine.SetPosition(1, m_target.transform.position);
+            if(!keepOn) {
+                StartCoroutine(LineDelay());
+            }
+        }
+        else {
+            aimLine.enabled = false;
+        }
+        //Debug.Log("stop show line");
+    }
+
+    public void HideLine() {
+        aimLine.enabled = false;
     }
 
     IEnumerator LineDelay() {

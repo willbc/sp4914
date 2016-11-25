@@ -61,21 +61,21 @@ public class Player_Controller : MonoBehaviour {
 
         verticalSpeed += Physics.gravity.y * Time.deltaTime;
     
-        if (characterController.isGrounded && Input.GetButtonDown ("Jump")) {
+        if(characterController.isGrounded && Input.GetButtonDown("Jump")) {
             verticalSpeed = jumpSpeed;
         }
 
         Mathf.Clamp (verticalSpeed, -verticalSpeedLimit, verticalSpeedLimit);
 
-        if (characterController.isGrounded) {
-            movement.Set (lateralInput * currentSpeed, verticalSpeed, forwardInput * currentSpeed);
+        if(characterController.isGrounded) {
+            movement.Set(lateralInput * currentSpeed, verticalSpeed, forwardInput * currentSpeed);
         } else {
-            movement.Set (lateralInput * currentSpeed / 1.5f, verticalSpeed, forwardInput * currentSpeed / 1.5f);
+            movement.Set(lateralInput * currentSpeed / 1.5f, verticalSpeed, forwardInput * currentSpeed / 1.5f);
         }
 
         movement = transform.rotation * movement;
 
-        characterController.Move ( movement * Time.deltaTime );
+        characterController.Move( movement * Time.deltaTime );
     }
 
     public void SetCursorLock(bool value) {
@@ -88,7 +88,7 @@ public class Player_Controller : MonoBehaviour {
 
     public void UpdateCursorLock() {
         //if the user set "lockCursor" we check & properly lock the cursos
-        if (lockCursor) {
+        if(lockCursor) {
             InternalLockUpdate();   
         }
     }
@@ -101,11 +101,11 @@ public class Player_Controller : MonoBehaviour {
             m_cursorIsLocked = true;
         }
 
-        if (m_cursorIsLocked) {
+        if(m_cursorIsLocked) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        else if (!m_cursorIsLocked) {
+        else if(!m_cursorIsLocked) {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }

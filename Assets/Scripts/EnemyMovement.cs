@@ -7,7 +7,11 @@ public class EnemyMovement : MonoBehaviour
     //PlayerHealth playerHealth;      // Reference to the player's health.
     //EnemyHealth enemyHealth;        // Reference to this enemy's health.
     NavMeshAgent nav;               // Reference to the nav mesh agent.
+    public float speed = 2.0f;
+    public float speedRegenRate = 0.1f;
 
+    Material mat;
+    Color baseColor;
 
     void Awake()
     {
@@ -16,6 +20,9 @@ public class EnemyMovement : MonoBehaviour
         //playerHealth = player.GetComponent<PlayerHealth>();
         //enemyHealth = GetComponent<EnemyHealth>();
         nav = GetComponent<NavMeshAgent>();
+        nav.speed = speed;
+        mat = transform.GetComponent<MeshRenderer>().material;
+        baseColor = mat.color;
     }
 
 
@@ -33,5 +40,24 @@ public class EnemyMovement : MonoBehaviour
             // ... disable the nav mesh agent.
             //nav.enabled = false;
         //}
+
+        ReplenishSpeed();
+    }
+
+    public void ReduceSpeed(float speedReduction, float speedRegenReduction) {
+        if(speedReduction != 1) {
+            nav.speed = speed * speedReduction;
+            mat.color = Color.magenta;
+        }
+    }
+
+    void ReplenishSpeed() {
+        if(nav.speed < speed) {
+            nav.speed += speedRegenRate * Time.deltaTime;
+            mat.color = Color.Lerp(mat.color, baseColor, Time.deltaTime * speedRegenRate);
+        }
+        else {
+            mat.color = baseColor;
+        }
     }
 }
