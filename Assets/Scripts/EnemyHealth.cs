@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour {
 
-    public float maxHealth = 500.0f;
+    public float maxHealth;
     float health;
     public float healthTextTimeout = 4.0f;
     float healthTextTimer = 0;
