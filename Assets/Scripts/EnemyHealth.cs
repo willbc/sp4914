@@ -12,6 +12,9 @@ public class EnemyHealth : MonoBehaviour {
     GameObject healthBar;
     private Image healthBarImage;
 
+    Player_Inventory_Controller playerInventory;
+    int moneyValue = 25;
+
     void Start() {
         health = maxHealth;
         healthBar = transform.Find("EnemyCanvas/HealthBG/Health").gameObject;
@@ -19,6 +22,7 @@ public class EnemyHealth : MonoBehaviour {
         healthBarImage = healthBar.GetComponent<Image>();
         Debug.Log(healthBarImage);
         UpdateEnemyHealthBar();
+        playerInventory = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player_Inventory_Controller>();
     }
 
     public void ReceiveDamage(float damage) {
@@ -49,6 +53,7 @@ public class EnemyHealth : MonoBehaviour {
     void Die() {
         Debug.Log("Enemy dead");
         //ClearEnemyHealthText();
+        playerInventory.EarnMoney(moneyValue);
         Destroy(gameObject);
     }
 

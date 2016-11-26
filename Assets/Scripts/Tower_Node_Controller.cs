@@ -20,12 +20,17 @@ public class Tower_Node_Controller : MonoBehaviour {
 
     RaycastHit hit;
 
+    bool disableActiveColor;
+
+    int[] towerCost = { 100, 75, 125 };
+
     public Renderer rend;
     Color towerSpotStandbyColor = new Color(68 / 255f, 230 / 255f, 255 / 255f, 147 / 255f);
-    Color towerSpotHighlightColor = new Color(0f, 255 / 255f, 0f, 147 / 255f);
+    Color towerSpotGreen  = new Color(0f, 255 / 255f, 0f, 147 / 255f);
+    Color towerSpotRed = new Color(1f, 0f, 0f, 147 / 255f);
 
 
-	void Start () {
+    void Start () {
         isHitByRay = false;
         rayController = GameObject.Find("Main Camera").GetComponent<Ray_Controller>();
         rend = GetComponent<Renderer>();
@@ -34,11 +39,13 @@ public class Tower_Node_Controller : MonoBehaviour {
         GameObject pathTesterObject = GameObject.Find("PathTester");
         mapController = GameObject.Find("MapGrid").GetComponent<Map_Controller>();
         playerInventory = GameObject.Find("Player").GetComponent<Player_Inventory_Controller>();
-	}
+        disableActiveColor = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if(Physics.Raycast (rayController.mainRay, out hit, range)) {
+        towerToBuild = playerInventory.getTowerIndex();
+        if (Physics.Raycast (rayController.mainRay, out hit, range)) {
             if(hit.collider.tag == "TowerSpot" && hit.collider.gameObject.GetInstanceID() == gameObject.GetInstanceID()) {
                 isHitByRay = true;
             }
@@ -50,40 +57,62 @@ public class Tower_Node_Controller : MonoBehaviour {
             isHitByRay = false;
         }
 
-        if(isHitByRay) {
-            SetToActiveColor();
-            if (!towerBuilt && Input.GetMouseButtonDown(1)) {
+        if (isHitByRay)
+        {
+            if (!disableActiveColor)
+            {
+                SetToActiveColor();
+            }
+            if (!towerBuilt && Input.GetMouseButtonDown(1))
+            {
                 BuildTower();
             }
-            else if(Input.GetMouseButtonDown(1)) {
+            else if (Input.GetMouseButtonDown(1))
+            {
                 // Tower management options, upgrade, destroy, etc.
             }
         }
         else {
             SetToStandbyColor();
         }
-	}
-
-    void SetToActiveColor() {
-        rend.material.color = towerSpotHighlightColor;
     }
 
-    void SetToStandbyColor() {
+    void SetToActiveColor()
+    {
+        rend.material.color = towerSpotGreen;
+    }
+
+    void SetToCannotBuildColor()
+    {
+        rend.material.color = towerSpotRed;
+    }
+
+    void SetToStandbyColor()
+    {
         rend.material.color = towerSpotStandbyColor;
     }
 
-    bool TestTowerSpace() {
+    bool TestTowerSpace()
+    {
         return false;
     }
 
-    public void BuildTower() {
+    public void BuildTower()
+    {
         string indexString = transform.parent.transform.name.Split('(', ')')[1];
         int index = 0;
         bool canBuildTower = false;
-        if(int.TryParse(indexString, out index)) {
+        if (int.TryParse(indexString, out index))
+        {
             canBuildTower = mapController.TestTowerSpot(index);
-            if(canBuildTower) {
+            if (canBuildTower && playerInventory.GetMoney() >= towerCost[towerToBuild])
+            {
                 BuildTowerConfirmed();
+                playerInventory.SpendMoney(towerCost[towerToBuild]);
+            }
+            else if (canBuildTower)
+            {
+                playerInventory.FlashRed();
             }
             else {
                 BuildTowerDenied();
@@ -91,13 +120,23 @@ public class Tower_Node_Controller : MonoBehaviour {
         }
     }
 
-    public void BuildTowerDenied() {
+    public void BuildTowerDenied()
+    {
+        StartCoroutine(DelayRed(0.5f));
         Debug.Log("Could not build tower");
     }
 
-    public void BuildTowerConfirmed() {
+    IEnumerator DelayRed(float waitTime)
+    {
+        disableActiveColor = true;
+        SetToCannotBuildColor();
+        yield return new WaitForSeconds(waitTime);
+        disableActiveColor = false;
+    }
+
+    public void BuildTowerConfirmed()
+    {
         towerFrame.transform.position = transform.position;
-        towerToBuild = playerInventory.getTowerIndex();
         GameObject tower = (GameObject)Instantiate(towers[towerToBuild], transform.position, transform.rotation);
         tower.transform.SetParent(transform);
         towerBuilt = true;
