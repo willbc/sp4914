@@ -24,7 +24,7 @@ public class Wave_Controller : MonoBehaviour {
         if(currentDelay >= currentDelayMax) {
             currentDelay = 0.0f;
             if(currentWaveSpawnCount < waveSize) {
-                Instantiate(enemyToSpawn, spawnPosition, new Quaternion());
+                InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 50.0f);
                 currentWaveSpawnCount++;
             }
             else {
@@ -35,5 +35,14 @@ public class Wave_Controller : MonoBehaviour {
         else {
             currentDelay += Time.deltaTime;
         }
+    }
+
+    void InstantiateEnemy(GameObject prefab, float speed, float speedRegenRate, float health) {
+        GameObject enemyObject = (GameObject)Instantiate(enemyToSpawn, spawnPosition, new Quaternion());
+        EnemyMovement em = enemyObject.GetComponent<EnemyMovement>();
+        EnemyHealth eh = enemyObject.GetComponent<EnemyHealth>();
+        em.speed = speed;
+        em.speedRegenRate = speedRegenRate;
+        eh.maxHealth = health;
     }
 }
