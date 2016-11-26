@@ -4,13 +4,16 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour {
 
-    public float maxHealth = 500.0f;
+    public float maxHealth;
     float health;
     public float healthTextTimeout = 4.0f;
     float healthTextTimer = 0;
     public Text enemyHealthText;
     GameObject healthBar;
     private Image healthBarImage;
+
+    Player_Inventory_Controller playerInventory;
+    int moneyValue = 25;
 
     void Start() {
         health = maxHealth;
@@ -19,6 +22,7 @@ public class EnemyHealth : MonoBehaviour {
         healthBarImage = healthBar.GetComponent<Image>();
         Debug.Log(healthBarImage);
         UpdateEnemyHealthBar();
+        playerInventory = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player_Inventory_Controller>();
     }
 
     public void ReceiveDamage(float damage) {
@@ -49,6 +53,7 @@ public class EnemyHealth : MonoBehaviour {
     void Die() {
         Debug.Log("Enemy dead");
         //ClearEnemyHealthText();
+        playerInventory.EarnMoney(moneyValue);
         Destroy(gameObject);
     }
 
