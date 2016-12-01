@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Wave_Controller1 : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class Wave_Controller1 : MonoBehaviour {
     public float spawnDelay;
     public float waveDelay;
     public int waveSize; //Use this as a difficulty setting
+    public Text waveText;
 
     int currentWaveSpawnCount = 0;
     float currentDelayMax;
@@ -26,6 +28,7 @@ public class Wave_Controller1 : MonoBehaviour {
         Debug.Log(spawnPosition);
         currentDelayMax = waveDelay;
         currentWaveNumber = 1;
+        waveText.text = "Wave: " + currentWaveNumber;
     }
 	
     void Update() {
@@ -67,6 +70,7 @@ public class Wave_Controller1 : MonoBehaviour {
                 currentDelayMax = waveDelay;
                 currentWaveNumber++; //Set to next wave
                 waveSize = waveSize + (currentWaveNumber * difficulty);
+                waveText.text = "WAVE " + currentWaveNumber;
             }
         }
         else {
