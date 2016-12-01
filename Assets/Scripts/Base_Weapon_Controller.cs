@@ -49,7 +49,7 @@ public class Base_Weapon_Controller : MonoBehaviour {
         else { // Standard raycast shot
             effectsTimer = 0f;
             shotLight.enabled = true;
-
+            shotLine.SetPosition(0, transform.position);
             shotRay.origin = transform.position;
             shotRay.direction = transform.forward;
 
