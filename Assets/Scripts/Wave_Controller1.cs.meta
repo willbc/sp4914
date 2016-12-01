@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2219bee5a510a9d4f8e1fb201a410a6d
+timeCreated: 1480568620
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - enemyToSpawn: {fileID: 1000012764441152, guid: b599f7b82318ed3419b718913c64fee9,
+      type: 2}
+  - enemyToSpawn2: {fileID: 1000012764441152, guid: 9a186790d73a26144b0ba65dc70034a9,
+      type: 2}
+  - enemyToSpawn3: {fileID: 1000012764441152, guid: 37fe1114ff238d6498d422469bbbd93d,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
