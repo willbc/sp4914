@@ -36,7 +36,7 @@ public class Wave_Controller1 : MonoBehaviour {
             currentDelay = 0.0f;
             if(currentWaveSpawnCount < waveSize) {
                 if (currentWaveNumber < 4) {
-                    InstantiateEnemy(enemyToSpawn, 20.0f, 0.1f, 500.0f * difficulty, spawnPosition);
+                    InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     currentWaveSpawnCount++;
                 }else if (currentWaveNumber < 6) {
                     InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
@@ -87,7 +87,7 @@ public class Wave_Controller1 : MonoBehaviour {
         em.speed = speed;
         em.speedRegenRate = speedRegenRate;
         eh.maxHealth = health;
-
+        em.SetSpeed();
     }
 
 

@@ -27,7 +27,7 @@ function OnMouseUp() {
     }
     else if (startGame == true) {
         //start the game
-        SceneManager.LoadScene("Main11-21");
+        SceneManager.LoadScene("Main12-01");
     }
     else if (menuScene == true) {
         //start the game

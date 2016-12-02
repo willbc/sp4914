@@ -46,7 +46,11 @@ public class EnemyMovement : MonoBehaviour
 
     public void ReduceSpeed(float speedReduction, float speedRegenReduction) {
         if(speedReduction != 1) {
+            Debug.Log("speed reduction" + speedReduction);
+            Debug.Log("speed" + speed);
+            Debug.Log("new speed" + speed * speedReduction);
             nav.speed = speed * speedReduction;
+
             mat.color = Color.magenta;
         }
     }
@@ -59,5 +63,9 @@ public class EnemyMovement : MonoBehaviour
         else {
             mat.color = baseColor;
         }
+    }
+
+    public void SetSpeed() {
+        nav.speed = speed;
     }
 }

@@ -12,8 +12,8 @@ public class ShootingSystem : MonoBehaviour
     EnemyMovement enemyTargetMovement;
     TrackingSystem tracker;
 
-    public float speedReduction = 0.0f;
-    public float speedRegenReduction = 0.0f;
+    public float speedReduction = 1.0f;
+    public float speedRegenReduction = 1.0f;
 
     void Start() {
         tracker = transform.GetComponent<TrackingSystem>();
