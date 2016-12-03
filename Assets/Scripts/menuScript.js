@@ -27,14 +27,17 @@ function OnMouseUp() {
     }
     else if (startGame == true) {
         //start the game
-        SceneManager.LoadScene("Main12-01");
+        SceneManager.LoadScene("Main12-02");
+        Player.SetActive(true);
+        Time.timeScale = 1.0;
+        PauseMenu.SetActive(false);
     }
     else if (menuScene == true) {
         //start the game
         SceneManager.LoadScene("menuScene");
     }
     else if(returnToGame) {
-        //SceneManager.LoadScene("Main11-21");
+        //SceneManager.LoadScene("Main12-02");
         Player.SetActive(true);
         Time.timeScale = 1.0;
         PauseMenu.SetActive(false);

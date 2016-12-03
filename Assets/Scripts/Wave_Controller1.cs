@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Wave_Controller1 : MonoBehaviour {
+public class Wave_Controller1 : MonoBehaviour
+{
 
     Vector3 spawnPosition;
     public GameObject enemyToSpawn;
@@ -19,38 +20,49 @@ public class Wave_Controller1 : MonoBehaviour {
 
     //Data for waves
     public int currentWaveNumber;
-    public int difficulty;
+    public int difficulty; //Set to 1, 2, or 3
 
 
 
-    void Start () {
+    void Start()
+    {
         spawnPosition = GameObject.Find("EnemyBase1").transform.position;
         Debug.Log(spawnPosition);
         currentDelayMax = waveDelay;
         currentWaveNumber = 1;
         waveText.text = "Wave: " + currentWaveNumber;
     }
-	
-    void Update() {
-        if(currentDelay >= currentDelayMax) {
+
+    void Update()
+    {
+        if (currentDelay >= currentDelayMax)
+        {
             currentDelay = 0.0f;
-            if(currentWaveSpawnCount < waveSize) {
-                if (currentWaveNumber < 4) {
+            currentDelayMax = waveDelay;
+            if (currentWaveSpawnCount < waveSize)
+            {
+                if (currentWaveNumber < 4)
+                {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     currentWaveSpawnCount++;
-                }else if (currentWaveNumber < 6) {
+                }
+                else if (currentWaveNumber < 6)
+                {
                     InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                     currentWaveSpawnCount += 3;
                 }
-                else if (currentWaveNumber < 8){
+                else if (currentWaveNumber < 8)
+                {
                     InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f, 1500.0f * difficulty, spawnPosition + new Vector3(0, 0, 4f));
                     currentWaveSpawnCount += 5;
                 }
-                else if (currentWaveNumber < 11){
+                else if (currentWaveNumber < 11)
+                {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                     currentWaveSpawnCount += 4;
-                }else if (currentWaveNumber < 15)
+                }
+                else if (currentWaveNumber < 15)
                 {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
@@ -67,10 +79,10 @@ public class Wave_Controller1 : MonoBehaviour {
             }
             else {
                 currentWaveSpawnCount = 0;
-                currentDelayMax = waveDelay;
+                currentDelayMax = spawnDelay;
                 currentWaveNumber++; //Set to next wave
                 waveSize = waveSize + (currentWaveNumber * difficulty);
-                waveText.text = "WAVE " + currentWaveNumber;
+                waveText.text = "Wave " + currentWaveNumber;
             }
         }
         else {
@@ -87,7 +99,7 @@ public class Wave_Controller1 : MonoBehaviour {
         em.speed = speed;
         em.speedRegenRate = speedRegenRate;
         eh.maxHealth = health;
-        em.SetSpeed();
+
     }
 
 
