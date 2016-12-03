@@ -41,6 +41,11 @@ public class Player_Controller : MonoBehaviour
     bool delayAttack = false;
     int damage;
 
+    public Image damageImage;
+    //public AudioClip deathClip;
+    public float flashSpeed = 5f;
+    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("enemy"))
@@ -118,7 +123,12 @@ public class Player_Controller : MonoBehaviour
 
         if (attacked && !delayAttack)
         {
+            damageImage.color = flashColour;
             StartCoroutine(EnemyAttack(1f));
+        }
+        else
+        {
+            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
     }
 
