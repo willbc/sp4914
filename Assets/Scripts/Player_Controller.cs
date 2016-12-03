@@ -71,8 +71,7 @@ public class Player_Controller : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         UpdateCursorLock();
         HUD.UpdatePlayerHealth(playerHealth, playerMaxHealth);
-        respawnLocation = new Vector3(-24f, 4f, 0f);
-
+        respawnLocation = GameObject.Find("EnemyBase1").transform.position;
     }
 
     void Update()
@@ -130,6 +129,18 @@ public class Player_Controller : MonoBehaviour
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
+
+        //Regen health
+        if (playerHealth < playerMaxHealth)
+        {
+            playerHealth += 2 * Time.deltaTime;
+            HUD.UpdatePlayerHealth(playerHealth, playerMaxHealth);
+            //Mathf.Clamp(currentCapacity, 0, maxCapacity);
+            //UpdateAmmoText();
+        }
+
+
+
     }
 
     IEnumerator EnemyAttack(float waitTime)
@@ -146,7 +157,7 @@ public class Player_Controller : MonoBehaviour
             playerHealth = 100;
             HUD.UpdatePlayerHealth(playerHealth, playerMaxHealth);
             //respawn somewhere else
-            camera.transform.position = respawnLocation;
+            characterController.transform.position = respawnLocation + new Vector3(-25f, 0, 0);
         }
         delayAttack = false;
     }
