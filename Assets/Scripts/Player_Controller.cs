@@ -14,8 +14,8 @@ public class Player_Controller : MonoBehaviour
 
     float mouseSensitivity = 1.0f;
     float pitchRange = 60.0f;
-
-    public Camera camera;
+    
+    public GameObject camera;
     CharacterController characterController;
     float forwardInput;
     float lateralInput;
