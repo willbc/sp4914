@@ -48,6 +48,7 @@
      <Compile Include="Assets\Assets\Scripts\BaseProjectile.cs" />
      <Compile Include="Assets\Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scene_Manager.cs" />
+     <Compile Include="Assets\Scripts\BaseHealth_Controller.cs" />
      <Compile Include="Assets\Scripts\Base_Weapon_Controller.cs" />
      <Compile Include="Assets\Scripts\CameraFacingBillboard.cs" />
      <Compile Include="Assets\Scripts\Crosshairs.cs" />
@@ -72,8 +73,6 @@
      <Compile Include="Assets\Scripts\TrackingSystem.cs" />
      <Compile Include="Assets\Scripts\Wave_Controller1.cs" />
      <Compile Include="Assets\Scripts\WeaponStats.cs" />
-     <Compile Include="Assets\Wave_Controller.cs" />
-     <Compile Include="Assets\Wave_Controller2.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

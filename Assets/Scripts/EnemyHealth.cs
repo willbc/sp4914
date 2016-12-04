@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class EnemyHealth : MonoBehaviour {
+public class EnemyHealth : MonoBehaviour
+{
 
     public float maxHealth;
     float health;
@@ -15,7 +16,10 @@ public class EnemyHealth : MonoBehaviour {
     Player_Inventory_Controller playerInventory;
     int moneyValue = 25;
 
-    void Start() {
+    int attack = 10;
+
+    void Start()
+    {
         health = maxHealth;
         healthBar = transform.Find("EnemyCanvas/HealthBG/Health").gameObject;
         Debug.Log(healthBar);
@@ -25,46 +29,63 @@ public class EnemyHealth : MonoBehaviour {
         playerInventory = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player_Inventory_Controller>();
     }
 
-    public void ReceiveDamage(float damage) {
+    public void ReceiveDamage(float damage)
+    {
         //Debug.Log("Enemy received damage: " + damage);
         health -= damage;
         UpdateEnemyHealthBar();
         //UpdateEnemyHealthText();
         //healthTextTimer = healthTextTimeout;
 
-        if(health <= 0) {
+        if (health <= 0)
+        {
             Die();
         }
     }
 
-    void UpdateEnemyHealthText() {
+    void UpdateEnemyHealthText()
+    {
         enemyHealthText.text = "Enemy Health: " + Mathf.Clamp(Mathf.RoundToInt(health), 0.0f, health);
     }
 
-    void UpdateEnemyHealthBar() {
+    void UpdateEnemyHealthBar()
+    {
         //Debug.Log("update health bar");
         healthBarImage.fillAmount = health / maxHealth;
     }
 
-    void ClearEnemyHealthText() {
+    void ClearEnemyHealthText()
+    {
         enemyHealthText.text = "";
     }
 
-    void Die() {
+    void Die()
+    {
         Debug.Log("Enemy dead");
         //ClearEnemyHealthText();
         playerInventory.EarnMoney(moneyValue);
         Destroy(gameObject);
     }
 
-    void Update() {
-//        if(healthTextTimer >= 0) {
-//            healthTextTimer -= Time.deltaTime;
-//        }
-//
-//        if(healthTextTimer <= 0 && healthTextTimer != -5) {
-//            ClearEnemyHealthText();
-//            healthTextTimer = -5;
-//        }
+    public void Explode()
+    {
+        Debug.Log("Enemy dead");    
+        Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        //        if(healthTextTimer >= 0) {
+        //            healthTextTimer -= Time.deltaTime;
+        //        }
+        //
+        //        if(healthTextTimer <= 0 && healthTextTimer != -5) {
+        //            ClearEnemyHealthText();
+        //            healthTextTimer = -5;
+        //        }
+    }
+    public int Attack()
+    {
+        return attack;
     }
 }
