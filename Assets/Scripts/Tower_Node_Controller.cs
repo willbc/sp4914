@@ -26,8 +26,8 @@ public class Tower_Node_Controller : MonoBehaviour {
 
     public Renderer rend;
     Color towerSpotStandbyColor = new Color(68 / 255f, 230 / 255f, 255 / 255f, 147 / 255f);
-    Color towerSpotGreen  = new Color(1f, 0f, 0f, 147 / 255f);
-    Color towerSpotRed = new Color(0f, 0f, 0f, 147 / 255f);
+    Color towerSpotGreen  = new Color(0f, 1f, 0f, 147 / 255f);
+    Color towerSpotRed = new Color(1f, 0f, 0f, 147 / 255f);
 
 
     void Start () {

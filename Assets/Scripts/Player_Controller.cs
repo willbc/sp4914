@@ -38,8 +38,8 @@ public class Player_Controller : MonoBehaviour
     float playerHealth = 100;
     float playerMaxHealth = 100;
     bool attacked = false;
-    bool delayAttack = false;
     int damage;
+    float enemyAttackCountdown = 0f;
 
     public Image damageImage;
     //public AudioClip deathClip;
@@ -50,6 +50,18 @@ public class Player_Controller : MonoBehaviour
     {
         if (other.CompareTag("enemy"))
         {
+            Debug.Log("Enemy approaches");
+            damage = other.GetComponent<EnemyHealth>().Attack();
+            attacked = true;
+
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("enemy"))
+        {
+            Debug.Log("Enemy near");
             damage = other.GetComponent<EnemyHealth>().Attack();
             attacked = true;
 
@@ -120,10 +132,11 @@ public class Player_Controller : MonoBehaviour
 
         characterController.Move(movement * Time.deltaTime);
 
-        if (attacked && !delayAttack)
-        {
+        if (attacked && enemyAttackCountdown <= 0f)
+        {   
+
             damageImage.color = flashColour;
-            StartCoroutine(EnemyAttack(1f));
+            EnemyAttack();
         }
         else
         {
@@ -139,18 +152,17 @@ public class Player_Controller : MonoBehaviour
             //UpdateAmmoText();
         }
 
+        enemyAttackCountdown = enemyAttackCountdown - Time.deltaTime;
 
 
     }
 
-    IEnumerator EnemyAttack(float waitTime)
+    void EnemyAttack()
     {
-        delayAttack = true;
-        yield return new WaitForSeconds(waitTime);
         playerHealth -= damage;
-        Debug.Log("Enemy");
-        HUD.UpdatePlayerHealth(playerHealth, playerMaxHealth);
         Debug.Log("Enemy attacks!");
+        HUD.UpdatePlayerHealth(playerHealth, playerMaxHealth);
+        Debug.Log("Enemy attacked");
         Debug.Log(playerHealth);
         if (playerHealth <= 0)
         {
@@ -159,7 +171,8 @@ public class Player_Controller : MonoBehaviour
             //respawn somewhere else
             characterController.transform.position = respawnLocation + new Vector3(-25f, 0, 0);
         }
-        delayAttack = false;
+        enemyAttackCountdown = 1f;
+        attacked = false;
     }
 
     public void SetCursorLock(bool value)

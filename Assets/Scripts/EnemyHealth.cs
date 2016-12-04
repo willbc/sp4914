@@ -67,6 +67,12 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void Explode()
+    {
+        Debug.Log("Enemy dead");    
+        Destroy(gameObject);
+    }
+
     void Update()
     {
         //        if(healthTextTimer >= 0) {
