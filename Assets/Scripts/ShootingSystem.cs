@@ -11,18 +11,23 @@ public class ShootingSystem : MonoBehaviour
     EnemyHealth enemyTarget;
     EnemyMovement enemyTargetMovement;
     TrackingSystem tracker;
+    AudioSource shotSound;
 
     public float speedReduction = 1.0f;
     public float speedRegenReduction = 1.0f;
 
     void Start() {
         tracker = transform.GetComponent<TrackingSystem>();
+        shotSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update() {
         shotTimer -= Time.deltaTime;
         if (shotTimer <= 0 && m_target != null && enemyTarget != null) {
+            if(shotSound != null) {
+                shotSound.Play();   
+            }
             enemyTarget.ReceiveDamage(damage);
             enemyTargetMovement.ReduceSpeed(speedReduction, speedRegenReduction);
             if(shootingSpeed == 0) {
