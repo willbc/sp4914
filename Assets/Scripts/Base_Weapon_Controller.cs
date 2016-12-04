@@ -12,6 +12,8 @@ public class Base_Weapon_Controller : MonoBehaviour {
     Vector3 hitPoint;
     GameObject hitObject;
 
+    Ray_Controller shotRayController;
+
     public float damage;
     public float range;
     public float rechargeSpeed;
@@ -50,7 +52,9 @@ public class Base_Weapon_Controller : MonoBehaviour {
             effectsTimer = 0f;
             shotLight.enabled = true;
             shotLine.SetPosition(0, transform.position);
-            shotRay.origin = transform.position;
+
+            shotRayController.Fire(damage, range, shootableMask);
+            /*shotRay.origin = transform.position;
             shotRay.direction = transform.forward;
 
 
@@ -67,7 +71,7 @@ public class Base_Weapon_Controller : MonoBehaviour {
                 if(enemy != null) {
                     enemy.ReceiveDamage(damage);
                 }
-            }
+            }*/
         }
     }
 
@@ -98,6 +102,8 @@ public class Base_Weapon_Controller : MonoBehaviour {
 
         UpdateAmmoText();
         //hudController.UpdateAmmoBar(10f, 20f);
+
+        shotRayController = GameObject.Find("Main Camera").GetComponent<Ray_Controller>();
     }
 
     void Update() {
