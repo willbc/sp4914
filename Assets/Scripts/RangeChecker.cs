@@ -39,9 +39,9 @@ public class RangeChecker : MonoBehaviour
         return m_targets;
     }
 
-    public void RemoveFromTargetList(GameObject objectToRemove) {
+    //public void RemoveFromTargetList(GameObject objectToRemove) {
         
-    }
+    //}
 
     public bool InRange(GameObject go) {
         for(int i = 0; i < m_targets.Count; i++) {

@@ -7,6 +7,7 @@ public class Tower_Controller : MonoBehaviour
     TrackingSystem m_tracker;
     ShootingSystem m_shooter;
     RangeChecker m_range;
+    public bool isBashTower=false;
 
     // Use this for initialization
     void Start() {
@@ -17,7 +18,13 @@ public class Tower_Controller : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        TargetNearest();
+        if (!isBashTower)
+        {
+            TargetNearest();
+        }
+        else {
+            TargetAll();
+        }
     }
 
     void TargetNearest() {
@@ -42,5 +49,12 @@ public class Tower_Controller : MonoBehaviour
 
         m_tracker.SetTarget(curTarget);
         m_shooter.SetTarget(curTarget);
+    }
+
+    void TargetAll()
+    {
+        List<GameObject> validTargets = m_range.GetValidTargets();
+        //m_tracker.SetMultipleTargets(validTargets);
+        m_shooter.SetMultipleTargets(validTargets);
     }
 }

@@ -69,7 +69,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void Explode()
     {
-        Debug.Log("Enemy dead");    
+        Debug.Log("Enemy exploded");    
         Destroy(gameObject);
     }
 

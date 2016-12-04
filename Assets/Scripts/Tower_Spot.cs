@@ -30,11 +30,11 @@ public class Tower_Spot : MonoBehaviour {
         rend.material.color = towerSpotHighlightColor;
     }
 
-    public void buildTower(KeyCode keyPressed){
-        if(keyPressed == KeyCode.E){
-            tower = Instantiate(Resources.Load("Assets/Prefabs/Tower1"), new Vector3(0,0,0), Quaternion.identity) as GameObject;
-        }
-    }
+    //public void buildTower(KeyCode keyPressed){
+    //    if(keyPressed == KeyCode.E){
+    //        tower = Instantiate(Resources.Load("Assets/Prefabs/Tower1"), new Vector3(0,0,0), Quaternion.identity) as GameObject;
+    //    }
+    //}
     public void ObjectHitLessThanTwo(){
         overTowerSpot = true;
     }
