@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.VR;
 
 public class Scene_Manager : MonoBehaviour {
 
@@ -9,7 +10,16 @@ public class Scene_Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+	    if(VRDevice.isPresent)
+        {
+            GameObject hud = GameObject.Find("BasicHUD1");
+            Vector3 oldPosition = hud.transform.position;
+            //Vector3 newPostion = new Vector3(oldPosition.x, oldPosition.y, oldPosition.z + 0.9f);
+            //hud.transform.position = newPostion;
+            RectTransform hudRect = hud.GetComponent<RectTransform>();
+            hudRect.localScale = new Vector3(0.0015f, 0.0015f, 1f);
+            Debug.Log("VR DETECTED");
+        }
 	}
 	
 	// Update is called once per frame
