@@ -13,6 +13,7 @@ public class ShootingSystem : MonoBehaviour
     TrackingSystem tracker;
     List<GameObject> m_targets;
     bool multiTargetOn;
+    AudioSource shotSound;
 
     public float speedReduction = 1.0f;
     public float speedRegenReduction = 1.0f;
@@ -24,6 +25,7 @@ public class ShootingSystem : MonoBehaviour
         tracker = transform.GetComponent<TrackingSystem>();
         multiTargetOn = false;
         attackLight.enabled = false;
+        shotSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,12 @@ public class ShootingSystem : MonoBehaviour
         {
             if (shotTimer <= 0 && m_target != null && enemyTarget != null)
             {
+                Debug.Log(shotSound);
+
+                if (shotSound != null)
+                {
+                    shotSound.Play();
+                }
                 enemyTarget.ReceiveDamage(damage);
                 enemyTargetMovement.ReduceSpeed(speedReduction, speedRegenReduction);
                 if (shootingSpeed == 0)
