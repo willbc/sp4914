@@ -9,6 +9,9 @@ public class Wave_Controller1 : MonoBehaviour
     public GameObject enemyToSpawn;
     public GameObject enemyToSpawn2;
     public GameObject enemyToSpawn3;
+    public GameObject enemyToSpawn4;
+    public GameObject enemyToSpawn5;
+    public GameObject enemyToSpawn6;
     public float spawnDelay;
     public float waveDelay;
     public int waveSize; //Use this as a difficulty setting
@@ -21,6 +24,14 @@ public class Wave_Controller1 : MonoBehaviour
     //Data for waves
     public int currentWaveNumber;
     public int difficulty; //Set to 1, 2, or 3
+    public int infWaves; //Set to 1 for inf waves
+
+    //Data for DARK/LIGHT mode
+    public int darkMode; //Set to 1 for dark mode
+    public Light myLight1;
+    public Light myLight2;
+    public Material mat1;
+
 
 
 
@@ -31,10 +42,28 @@ public class Wave_Controller1 : MonoBehaviour
         currentDelayMax = waveDelay;
         currentWaveNumber = 1;
         waveText.text = "Wave: " + currentWaveNumber;
+
+        if(darkMode != 1){
+            enemyToSpawn = enemyToSpawn4;
+            enemyToSpawn2 = enemyToSpawn5;
+            enemyToSpawn3 = enemyToSpawn6;
+            //RenderSettings.skybox = mat1;
+
+        }
+        else{
+            //We are using dark mode
+
+            myLight1.enabled = false;
+            myLight2.enabled = false;
+            RenderSettings.skybox = mat1;
+        }
+
+
     }
 
     void Update()
     {
+
         if (currentDelay >= currentDelayMax)
         {
             currentDelay = 0.0f;
@@ -65,16 +94,33 @@ public class Wave_Controller1 : MonoBehaviour
                 else if (currentWaveNumber < 15)
                 {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
-                    InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
+                    //InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                     InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f, 1500.0f * difficulty, spawnPosition + new Vector3(0, 0, 4f));
                     currentWaveSpawnCount += 9;
                 }
-                else {
+                else if (currentWaveNumber < 21)
+                {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                     InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f, 1500.0f * difficulty, spawnPosition + new Vector3(0, 0, 4f));
-                    InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition + new Vector3(0, 0, 6f));
+                   // InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition + new Vector3(0, 0, 6f));
                     currentWaveSpawnCount += 8;
+                }
+                else {
+
+                    if (infWaves == 1)
+                    {
+                        InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
+                        InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
+                        InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f, 1500.0f * difficulty, spawnPosition + new Vector3(0, 0, 4f));
+                        InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition + new Vector3(0, 0, 6f));
+                        currentWaveSpawnCount += 8;
+                    }
+                    else
+                    {
+                        
+                    }
+                    
                 }
             }
             else {
@@ -82,13 +128,23 @@ public class Wave_Controller1 : MonoBehaviour
                 currentDelayMax = spawnDelay;
                 currentWaveNumber++; //Set to next wave
                 waveSize = waveSize + (currentWaveNumber * difficulty);
-                waveText.text = "Wave " + currentWaveNumber;
+                if ((currentWaveNumber > 20) && (infWaves != 1))
+                {
+                    waveText.text = "Wave: 20";
+                }
+                else{
+                    waveText.text = "Wave: " + currentWaveNumber;
+                }
+                
             }
         }
         else {
             currentDelay += Time.deltaTime;
         }
     }
+
+
+
 
     void InstantiateEnemy(GameObject prefab, float speed, float speedRegenRate, float health, Vector3 spawnPositionIns)
     {
