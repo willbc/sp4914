@@ -51,16 +51,16 @@ function OnMouseUp() {
         PauseMenu.SetActive(false);
     }
     else if(startReg) {
-        SceneManager.LoadScene("Main12-01");
+        SceneManager.LoadScene("Main12-05");
     }
     else if(startRegDark) {
-        SceneManager.LoadScene("Main12-01");
+        SceneManager.LoadScene("Main12-05");
     }
     else if(startInf) {
-        SceneManager.LoadScene("Main12-01");
+        SceneManager.LoadScene("Main12-05");
     }
     else if(startInfDark) {
-        SceneManager.LoadScene("Main12-01");
+        SceneManager.LoadScene("Main12-05");
     }
     else {
         //load level
@@ -95,19 +95,19 @@ function Update() {
     }
     else if(isStartSelectionMenu){
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
-            SceneManager.LoadScene("Main12-01"); // Start reg
+            SceneManager.LoadScene("Main12-05"); // Start reg
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2)) {
-            SceneManager.LoadScene("Main12-01"); // Start reg dark
+            SceneManager.LoadScene("Main12-05"); // Start reg dark
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha3)) {
-            SceneManager.LoadScene("Main12-01"); // Start inf
+            SceneManager.LoadScene("Main12-05"); // Start inf
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha4)) {
-            SceneManager.LoadScene("Main12-01"); // Start inf dark
+            SceneManager.LoadScene("Main12-05"); // Start inf dark
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha5)) { // Quit

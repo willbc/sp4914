@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Wave_Controller1 : MonoBehaviour
 {
@@ -24,10 +25,10 @@ public class Wave_Controller1 : MonoBehaviour
     //Data for waves
     public int currentWaveNumber;
     public int difficulty; //Set to 1, 2, or 3
-    public int infWaves; //Set to 1 for inf waves
+    public bool infWaves = false;
 
     //Data for DARK/LIGHT mode
-    public int darkMode; //Set to 1 for dark mode
+    public bool darkMode = false;
     public Light myLight1;
     public Light myLight2;
     public Material mat1;
@@ -35,22 +36,21 @@ public class Wave_Controller1 : MonoBehaviour
 
 
 
-    void Start()
-    {
+    void Start() {
         spawnPosition = GameObject.Find("EnemyBase1").transform.position;
         Debug.Log(spawnPosition);
         currentDelayMax = waveDelay;
         currentWaveNumber = 1;
         waveText.text = "Wave: " + currentWaveNumber;
 
-        if(darkMode != 1){
+        if(!darkMode) {
             enemyToSpawn = enemyToSpawn4;
             enemyToSpawn2 = enemyToSpawn5;
             enemyToSpawn3 = enemyToSpawn6;
             //RenderSettings.skybox = mat1;
 
         }
-        else{
+        else {
             //We are using dark mode
 
             myLight1.enabled = false;
@@ -61,63 +61,51 @@ public class Wave_Controller1 : MonoBehaviour
 
     }
 
-    void Update()
-    {
+    void Update() {
 
-        if (currentDelay >= currentDelayMax)
-        {
+        if (currentDelay >= currentDelayMax) {
             currentDelay = 0.0f;
             currentDelayMax = waveDelay;
-            if (currentWaveSpawnCount < waveSize)
-            {
-                if (currentWaveNumber < 4)
-                {
+            if (currentWaveSpawnCount < waveSize) {
+                if (currentWaveNumber < 4) {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     currentWaveSpawnCount++;
                 }
-                else if (currentWaveNumber < 6)
-                {
+                else if (currentWaveNumber < 6) {
                     InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                     currentWaveSpawnCount += 3;
                 }
-                else if (currentWaveNumber < 8)
-                {
+                else if (currentWaveNumber < 8) {
                     InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f, 1500.0f * difficulty, spawnPosition + new Vector3(0, 0, 4f));
                     currentWaveSpawnCount += 5;
                 }
-                else if (currentWaveNumber < 11)
-                {
+                else if (currentWaveNumber < 11) {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                     currentWaveSpawnCount += 4;
                 }
-                else if (currentWaveNumber < 15)
-                {
+                else if (currentWaveNumber < 15) {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     //InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                     InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f, 1500.0f * difficulty, spawnPosition + new Vector3(0, 0, 4f));
                     currentWaveSpawnCount += 9;
                 }
-                else if (currentWaveNumber < 21)
-                {
+                else if (currentWaveNumber < 21) {
                     InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                     InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                     InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f, 1500.0f * difficulty, spawnPosition + new Vector3(0, 0, 4f));
                    // InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition + new Vector3(0, 0, 6f));
                     currentWaveSpawnCount += 8;
                 }
-                else {
-
-                    if (infWaves == 1)
-                    {
+                else { 
+                    if (infWaves) {
                         InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition);
                         InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
                         InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f, 1500.0f * difficulty, spawnPosition + new Vector3(0, 0, 4f));
                         InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition + new Vector3(0, 0, 6f));
                         currentWaveSpawnCount += 8;
                     }
-                    else
-                    {
+                    else {
                         
                     }
                     
@@ -128,11 +116,10 @@ public class Wave_Controller1 : MonoBehaviour
                 currentDelayMax = spawnDelay;
                 currentWaveNumber++; //Set to next wave
                 waveSize = waveSize + (currentWaveNumber * difficulty);
-                if ((currentWaveNumber > 20) && (infWaves != 1))
-                {
+                if ((currentWaveNumber > 20) && (!infWaves)) {
                     waveText.text = "Wave: 20";
                 }
-                else{
+                else {
                     waveText.text = "Wave: " + currentWaveNumber;
                 }
                 
@@ -140,6 +127,13 @@ public class Wave_Controller1 : MonoBehaviour
         }
         else {
             currentDelay += Time.deltaTime;
+        }
+
+        if(!infWaves && currentWaveNumber >= 20) {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+            if(enemies.Length == 0) {
+                SceneManager.LoadScene("GameOverWin");
+            }
         }
     }
 
