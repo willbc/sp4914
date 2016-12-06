@@ -7,11 +7,11 @@ public class Scene_Manager : MonoBehaviour {
 
     public GameObject PauseMenu;
     public GameObject Player;
+    public GameObject weapon;
 
     // Use this for initialization
     void Start () {
-        if(VRDevice.isPresent)
-        {
+        if(VRDevice.isPresent) {
             GameObject hud = GameObject.Find("BasicHUD1");
             Vector3 oldPosition = hud.transform.position;
             //Vector3 newPostion = new Vector3(oldPosition.x, oldPosition.y, oldPosition.z + 0.9f);
@@ -19,6 +19,7 @@ public class Scene_Manager : MonoBehaviour {
             RectTransform hudRect = hud.GetComponent<RectTransform>();
             hudRect.localScale = new Vector3(0.0015f, 0.0015f, 1f);
             //Debug.Log("VR DETECTED");
+            weapon.GetComponent<Light>().enabled = false;
         }
     }
 
