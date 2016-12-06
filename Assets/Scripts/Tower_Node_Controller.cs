@@ -6,8 +6,11 @@ public class Tower_Node_Controller : MonoBehaviour {
     Ray playerRay;
     Ray_Controller rayController;
     public GameObject[] towers;
+    public GameObject[] towers2;
+    public GameObject[] towers3;
     public int towerToBuild;
     public GameObject towerFrame;
+    GameObject tower;
 
     Map_Controller mapController;
     Player_Inventory_Controller playerInventory;
@@ -22,7 +25,9 @@ public class Tower_Node_Controller : MonoBehaviour {
 
     bool disableActiveColor;
 
-    int[] towerCost = { 100, 75, 125 };
+    int[] towerCostLevel1 = { 100, 75, 125 };
+    int[] towerCostLevel2 = { 300, 200, 400 };
+    int[] towerCostLevel3 = { 1000, 500, 1500 };
 
     public Renderer rend;
     Color towerSpotStandbyColor = new Color(68 / 255f, 230 / 255f, 255 / 255f, 147 / 255f);
@@ -69,7 +74,7 @@ public class Tower_Node_Controller : MonoBehaviour {
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                // Tower management options, upgrade, destroy, etc.
+                UpgradeTower();
             }
         }
         else {
@@ -105,10 +110,10 @@ public class Tower_Node_Controller : MonoBehaviour {
         if (int.TryParse(indexString, out index))
         {
             canBuildTower = mapController.TestTowerSpot(index);
-            if (canBuildTower && playerInventory.GetMoney() >= towerCost[towerToBuild])
+            if (canBuildTower && playerInventory.GetMoney() >= towerCostLevel1[towerToBuild])
             {
                 BuildTowerConfirmed();
-                playerInventory.SpendMoney(towerCost[towerToBuild]);
+                playerInventory.SpendMoney(towerCostLevel1[towerToBuild]);
             }
             else if (canBuildTower)
             {
@@ -137,26 +142,43 @@ public class Tower_Node_Controller : MonoBehaviour {
     public void BuildTowerConfirmed()
     {
         towerFrame.transform.position = transform.position;
-        GameObject tower = (GameObject)Instantiate(towers[towerToBuild], transform.position, transform.rotation);
+        tower = (GameObject)Instantiate(towers[towerToBuild], transform.position, transform.rotation);
         tower.transform.SetParent(transform);
         towerBuilt = true;
-        /*towerFrame.transform.position = transform.position;//new Vector3(transform.position.x, transform.position.y, 0f);
-        NavMeshPath path = new NavMeshPath();
-        pathTester.CalculatePath(GameObject.FindGameObjectWithTag("Finish").transform.position, path);
-        Debug.Log("before yield");
-        yield return new WaitForSeconds(Time.deltaTime * 4);
-        Debug.Log("after yeild");
-        Debug.Log("test path: " + pathTester.hasPath);
-        Debug.Log(path.status);
-        Debug.Log(path.corners);
-        testTowerSpace = (path.status == NavMeshPathStatus.PathComplete);
-        if(testTowerSpace) {
-            GameObject tower = (GameObject)Instantiate(towerToBuild, transform.position, transform.rotation);
-            tower.transform.SetParent(transform);
-            towerBuilt = true;
+    }
+
+    public void UpgradeTower()
+    {
+        if(GetComponentInChildren<Tower_Controller>().GetTowerLevel() == 1)
+        {
+            if (playerInventory.GetMoney() < towerCostLevel2[GetComponentInChildren<Tower_Controller>().GetTowerType()])
+            {
+                playerInventory.FlashRed();
+            }
+            else
+            {
+                Destroy(tower);
+                tower = (GameObject)Instantiate(towers2[GetComponentInChildren<Tower_Controller>().GetTowerType()], transform.position, transform.rotation);
+                tower.transform.SetParent(transform);
+                playerInventory.SpendMoney(towerCostLevel2[GetComponentInChildren<Tower_Controller>().GetTowerType()]);
+            }
+        }
+        else if (GetComponentInChildren<Tower_Controller>().GetTowerLevel() == 2)
+        {
+            if (playerInventory.GetMoney() < towerCostLevel3[GetComponentInChildren<Tower_Controller>().GetTowerType()])
+            {
+                playerInventory.FlashRed();
+            }
+            else
+            {
+                Destroy(tower);
+                tower = (GameObject)Instantiate(towers3[GetComponentInChildren<Tower_Controller>().GetTowerType()], transform.position, transform.rotation);
+                tower.transform.SetParent(transform);
+                playerInventory.SpendMoney(towerCostLevel3[GetComponentInChildren<Tower_Controller>().GetTowerType()]);
+            }
         }
         else {
-            towerFrame.transform.position = new Vector3(transform.position.x, transform.position.y - 2.0f, transform.position.z);
-        }*/
+            //do nothing
+        }
     }
 }

@@ -7,7 +7,11 @@ public class Tower_Controller : MonoBehaviour
     TrackingSystem m_tracker;
     ShootingSystem m_shooter;
     RangeChecker m_range;
-    public bool isBashTower=false;
+    public bool isShockTower = false;
+    public bool isSlowTower = false;
+    public bool isBashTower = false;
+
+    public int TowerLevel;
 
     // Use this for initialization
     void Start() {
@@ -56,5 +60,27 @@ public class Tower_Controller : MonoBehaviour
         List<GameObject> validTargets = m_range.GetValidTargets();
         //m_tracker.SetMultipleTargets(validTargets);
         m_shooter.SetMultipleTargets(validTargets);
+    }
+
+    public int GetTowerLevel()
+    {
+        return TowerLevel;
+    }
+
+    public int GetTowerType()
+    {
+        if (isShockTower)
+        {
+            return 0;
+        }
+        if (isSlowTower)
+        {
+            return 1;
+        }
+        if (isBashTower)
+        {
+            return 2;
+        }
+        return 3;
     }
 }

@@ -46,6 +46,9 @@ public class Player_Controller : MonoBehaviour
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
+    Player_Inventory_Controller PlayerInventoryController;
+    int moneyAmount;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("enemy"))
@@ -80,6 +83,7 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         HUD = GameObject.Find("BasicHUD1").GetComponent<HUDController>();
+        PlayerInventoryController = GameObject.Find("Player").GetComponent<Player_Inventory_Controller>();
         characterController = GetComponent<CharacterController>();
         UpdateCursorLock();
         HUD.UpdatePlayerHealth(playerHealth, playerMaxHealth);
@@ -169,7 +173,16 @@ public class Player_Controller : MonoBehaviour
             playerHealth = 100;
             HUD.UpdatePlayerHealth(playerHealth, playerMaxHealth);
             //respawn somewhere else
-            characterController.transform.position = respawnLocation + new Vector3(-25f, 0, 0);
+            characterController.transform.position =  new Vector3(-20f, 0, 0);
+            moneyAmount = PlayerInventoryController.GetMoney();
+            if(moneyAmount > 500)
+            {
+                PlayerInventoryController.SpendMoney(500);
+            }
+            else
+            {
+                PlayerInventoryController.SpendMoney(moneyAmount);
+            }
         }
         enemyAttackCountdown = 1f;
         attacked = false;
