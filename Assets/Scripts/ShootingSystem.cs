@@ -35,8 +35,6 @@ public class ShootingSystem : MonoBehaviour
         {
             if (shotTimer <= 0 && m_target != null && enemyTarget != null)
             {
-                Debug.Log(shotSound);
-
                 if (shotSound != null)
                 {
                     shotSound.Play();
