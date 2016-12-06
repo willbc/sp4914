@@ -149,6 +149,7 @@ public class Tower_Node_Controller : MonoBehaviour {
 
     public void UpgradeTower()
     {
+        Debug.Log("UPGRADE TOWER");
         if(GetComponentInChildren<Tower_Controller>().GetTowerLevel() == 1)
         {
             if (playerInventory.GetMoney() < towerCostLevel2[GetComponentInChildren<Tower_Controller>().GetTowerType()])
