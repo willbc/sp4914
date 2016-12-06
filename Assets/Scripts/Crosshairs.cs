@@ -14,6 +14,6 @@ public class Crosshairs : MonoBehaviour {
 	}
 	
     void OnGUI() {
-        GUI.DrawTexture(crosshairRect, crosshairTexture);
+        //GUI.DrawTexture(crosshairRect, crosshairTexture);
     }
 }
