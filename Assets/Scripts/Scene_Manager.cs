@@ -19,7 +19,7 @@ public class Scene_Manager : MonoBehaviour {
             RectTransform hudRect = hud.GetComponent<RectTransform>();
             hudRect.localScale = new Vector3(0.0015f, 0.0015f, 1f);
             //Debug.Log("VR DETECTED");
-            weapon.GetComponent<Light>().enabled = false;
+            Destroy(weapon.GetComponent<Light>());
         }
     }
 

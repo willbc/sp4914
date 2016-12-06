@@ -70,41 +70,41 @@ public class Wave_Controller1 : MonoBehaviour
             currentDelayMax = waveDelay;
             if (currentWaveSpawnCount < waveSize) {
                 if (currentWaveNumber < 4) {
-                    InstantiateEnemy(enemyToSpawn, 2.0f * waveDifficulty, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
+                    InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
                     currentWaveSpawnCount++;
                 }
                 else if (currentWaveNumber < 6) {
-                    InstantiateEnemy(enemyToSpawn2, 1.0f * waveDifficulty, 0.1f * waveDifficulty, 1000.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 2f));
+                    InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f * waveDifficulty, 1000.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 2f));
                     currentWaveSpawnCount += 3;
                 }
                 else if (currentWaveNumber < 8) {
-                    InstantiateEnemy(enemyToSpawn3, 0.5f * waveDifficulty, 0.1f * waveDifficulty, 1500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 4f));
+                    InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f * waveDifficulty, 1500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 4f));
                     currentWaveSpawnCount += 5;
                 }
                 else if (currentWaveNumber < 11) {
-                    InstantiateEnemy(enemyToSpawn, 2.0f * waveDifficulty, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
-                    InstantiateEnemy(enemyToSpawn2, 1.0f * waveDifficulty, 0.1f * waveDifficulty, 1000.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 2f));
+                    InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
+                    InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f * waveDifficulty, 1000.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 2f));
                     currentWaveSpawnCount += 4;
                 }
                 else if (currentWaveNumber < 15) {
-                    InstantiateEnemy(enemyToSpawn, 2.0f * waveDifficulty, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
+                    InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
                     //InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f, 1000.0f * difficulty, spawnPosition + new Vector3(0, 0, 2f));
-                    InstantiateEnemy(enemyToSpawn3, 0.5f * waveDifficulty, 0.1f * waveDifficulty, 1500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 4f));
+                    InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f * waveDifficulty, 1500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 4f));
                     currentWaveSpawnCount += 9;
                 }
                 else if (currentWaveNumber < 21) {
-                    InstantiateEnemy(enemyToSpawn, 2.0f * waveDifficulty, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
-                    InstantiateEnemy(enemyToSpawn2, 1.0f * waveDifficulty, 0.1f * waveDifficulty, 1000.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 2f));
-                    InstantiateEnemy(enemyToSpawn3, 0.5f * waveDifficulty, 0.1f * waveDifficulty, 1500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 4f));
+                    InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
+                    InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f * waveDifficulty, 1000.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 2f));
+                    InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f * waveDifficulty, 1500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 4f));
                    // InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f, 500.0f * difficulty, spawnPosition + new Vector3(0, 0, 6f));
                     currentWaveSpawnCount += 8;
                 }
                 else { 
                     if (infWaves) {
-                        InstantiateEnemy(enemyToSpawn, 2.0f * waveDifficulty, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
-                        InstantiateEnemy(enemyToSpawn2, 1.0f * waveDifficulty, 0.1f * waveDifficulty, 1000.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 2f));
-                        InstantiateEnemy(enemyToSpawn3, 0.5f * waveDifficulty, 0.1f * waveDifficulty, 1500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 4f));
-                        InstantiateEnemy(enemyToSpawn, 2.0f * waveDifficulty, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 6f));
+                        InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition);
+                        InstantiateEnemy(enemyToSpawn2, 1.0f, 0.1f * waveDifficulty, 1000.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 2f));
+                        InstantiateEnemy(enemyToSpawn3, 0.5f, 0.1f * waveDifficulty, 1500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 4f));
+                        InstantiateEnemy(enemyToSpawn, 2.0f, 0.1f * waveDifficulty, 500.0f * difficulty * waveDifficulty, spawnPosition + new Vector3(0, 0, 6f));
                         currentWaveSpawnCount += 8;
                     }
                     else {

@@ -50,7 +50,9 @@ public class Base_Weapon_Controller : MonoBehaviour {
         }
         else { // Standard raycast shot
             effectsTimer = 0f;
-            shotLight.enabled = true;
+            if(shotLight != null) {
+                shotLight.enabled = true;    
+            }
             shotLine.SetPosition(0, transform.position);
 
             shotRayController.Fire(damage, range, shootableMask);
@@ -111,7 +113,7 @@ public class Base_Weapon_Controller : MonoBehaviour {
         effectsTimer += Time.deltaTime;
 
         if(effectsTimer > shotEffectsDisplayTime) {
-            if(shotLine != null) {
+            if(shotLine != null && shotLight != null) {
                 shotLine.enabled = false;
                 shotLight.enabled = false;
             }

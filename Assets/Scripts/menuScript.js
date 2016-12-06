@@ -86,6 +86,7 @@ function Update() {
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2)) { // Return to menu
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("menuScene");
         }
 
@@ -95,18 +96,22 @@ function Update() {
     }
     else if(isStartSelectionMenu){
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("Main_Final"); // Start reg
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("Main_Final_Dark"); // Start reg dark
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha3)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("Main_Final_Inf"); // Start inf
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha4)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("Main_Final_Inf_Dark"); // Start inf dark
         }
 
@@ -116,6 +121,7 @@ function Update() {
     }
     else {
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("startGameMenu");
         }
 
