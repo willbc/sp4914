@@ -13,6 +13,8 @@
 5. [Virtual Reality](#vr)
 6. [Game Modes](#game-modes)
 7. [Towers](#towers)
+8. [Enemies](#enemies)
+
 ---
 
 ---
@@ -179,3 +181,44 @@ The bash tower is a multi-target tower that hits all enemies in the attack range
 * Range: Average
 * Effect: Weak slow
 * Cost: High
+
+
+
+
+
+---
+
+---
+<a name="enemies"></a>
+# Enemies
+
+There are three different enemies in the final version of the game, each of which have 2 different skins (one for day time and one for night time).
+
+## Cube Enemy 1
+This is the first enemy that the player will face in the game. It is the smallest and weakest enemy, but also the fastest. 
+### Stats
+* Size: Small
+* Damage: Normal
+* Speed: Fast
+* Health: Low
+* Value: $25
+
+## Cube Enemy 2
+This is the second enemy type that the player will face in the game. It is the most well rounded enemy. 
+### Stats
+* Size: Medium
+* Damage: Normal
+* Speed: Normal
+* Health: Normal
+* Value: $25
+
+## Cube Enemy 3
+This is the final enemy type that the player will face in the game. It is the largest and hardest enemy to destroy.
+### Stats
+* Size: Large
+* Damage: Normal
+* Speed: Slow
+* Health: High
+* Value: $25
+
+
