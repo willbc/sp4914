@@ -46,20 +46,24 @@ function OnMouseUp() {
     }
     else if(returnToGame) {
         //SceneManager.LoadScene("Main12-02");
-        Player.SetActive(true);
         Time.timeScale = 1.0;
+        Player.SetActive(true);
         PauseMenu.SetActive(false);
     }
     else if(startReg) {
+        Time.timeScale = 1.0;
         SceneManager.LoadScene("Main_Final");
     }
     else if(startRegDark) {
+        Time.timeScale = 1.0;
         SceneManager.LoadScene("Main_Final_Dark");
     }
     else if(startInf) {
+        Time.timeScale = 1.0;
         SceneManager.LoadScene("Main_Final_Inf");
     }
     else if(startInfDark) {
+        Time.timeScale = 1.0;
         SceneManager.LoadScene("Main_Final_Inf_Dark");
     }
     else {
@@ -79,8 +83,8 @@ function Update() {
     if(isPauseMenu) {
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
             if(isPauseMenu) { // Return to game
-                Player.SetActive(true);
                 Time.timeScale = 1.0;
+                Player.SetActive(true);
                 PauseMenu.SetActive(false);
             }
         }
@@ -95,18 +99,22 @@ function Update() {
     }
     else if(isStartSelectionMenu){
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("Main_Final"); // Start reg
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("Main_Final_Dark"); // Start reg dark
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha3)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("Main_Final_Inf"); // Start inf
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha4)) {
+            Time.timeScale = 1.0;
             SceneManager.LoadScene("Main_Final_Inf_Dark"); // Start inf dark
         }
 
